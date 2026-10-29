@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chủ đề 29: Định Luật Bảo Toàn Động Lượng - Luyện Tập Vật Lí 10</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --primary-light: #dbeafe;
+      --accent: #f59e0b;
+      --accent-light: #fef3c7;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --radius: 14px;
+      --shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      padding-bottom: 60px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 18px 16px;
+    }
+
+    /* HEADER */
+    .app-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-title h1 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .header-title p {
+      font-size: 0.92rem;
+      opacity: 0.92;
+    }
+
+    .header-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    /* 3 REQUIRED CONTROLS BAR */
+    .controls-panel {
+      background: var(--card);
+      border: 2px solid #bfdbfe;
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 820px) {
+      .controls-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .control-box {
+      background: #f8fafc;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .control-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .student-inputs {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 8px;
+    }
+
+    .student-inputs input {
+      width: 100%;
+      padding: 9px 11px;
+      border: 1.5px solid #94a3b8;
+      border-radius: 8px;
+      font-size: 0.93rem;
+      font-weight: 600;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .student-inputs input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .btn-action {
+      border: none;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.12s, background 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+
+    .btn-action:active {
+      transform: scale(0.98);
+    }
+
+    .btn-sound {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-sound.muted {
+      background: #64748b;
+      box-shadow: none;
+    }
+
+    .btn-sound-test {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fcd34d;
+      padding: 5px 10px;
+      border-radius: 7px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-report {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      height: 100%;
+      min-height: 52px;
+      font-size: 0.96rem;
+    }
+
+    .btn-report:hover {
+      background: linear-gradient(135deg, #047857 0%, #059669 100%);
+    }
+
+    /* SOUND TOAST */
+    .sound-toast {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1000;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+      transform: translateY(-120%);
+      opacity: 0;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s;
+      pointer-events: none;
+      max-width: 350px;
+    }
+
+    .sound-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .sound-toast.correct {
+      background: #16a34a;
+      color: #ffffff;
+      border: 2px solid #86efac;
+    }
+
+    .sound-toast.wrong {
+      background: #dc2626;
+      color: #ffffff;
+      border: 2px solid #fca5a5;
+    }
+
+    /* LEVEL TABS & LOCK PROGRESS */
+    .unlock-banner {
+      background: linear-gradient(90deg, #eff6ff 0%, #fef3c7 100%);
+      border: 2px solid #93c5fd;
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .unlock-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .unlock-title {
+      font-weight: 800;
+      font-size: 0.98rem;
+      color: #1e3a8a;
+    }
+
+    .unlock-subtitle {
+      font-size: 0.86rem;
+      color: #334155;
+    }
+
+    .stars-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .star-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      background: #e2e8f0;
+      color: #475569;
+      border: 1.5px solid #cbd5e1;
+    }
+
+    .star-pill.done {
+      background: #dcfce7;
+      color: #15803d;
+      border-color: #4ade80;
+    }
+
+    .level-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 680px) {
+      .level-tabs {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .level-tab {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.18s;
+      position: relative;
+    }
+
+    .level-tab.active {
+      border-color: var(--primary);
+      background: #eff6ff;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.15);
+    }
+
+    .level-tab.locked {
+      opacity: 0.65;
+      background: #f1f5f9;
+      cursor: not-allowed;
+    }
+
+    .level-tab-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .level-name {
+      font-weight: 800;
+      font-size: 0.96rem;
+      color: var(--text);
+    }
+
+    .level-status-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .level-tab.active .level-status-badge {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .level-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* LEVEL TOOLBAR */
+    .level-toolbar {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .level-stats {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .stat-item span {
+      color: var(--primary);
+    }
+
+    .btn-shuffle {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.86rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-shuffle:hover {
+      background: var(--primary-hover);
+    }
+
+    /* QUESTION CARDS */
+    .questions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .question-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+      transition: border-color 0.2s;
+    }
+
+    .question-card.answered-correct {
+      border-color: #4ade80;
+    }
+
+    .question-card.answered-wrong {
+      border-color: #f87171;
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+
+    .q-num {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.86rem;
+      padding: 4px 11px;
+      border-radius: 999px;
+    }
+
+    .q-tag {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: #f1f5f9;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .q-text {
+      font-size: 1.03rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .q-illustration {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: auto;
+    }
+
+    .q-illustration svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-btn {
+      background: #f8fafc;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 11px 14px;
+      text-align: left;
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.15s;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+    }
+
+    .option-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #1e293b;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-btn.correct {
+      background: var(--success-bg);
+      border-color: var(--success);
+      color: #065f46;
+    }
+
+    .option-btn.correct .option-letter {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .option-btn.wrong {
+      background: var(--danger-bg);
+      border-color: var(--danger);
+      color: #7f1d1d;
+    }
+
+    .option-btn.wrong .option-letter {
+      background: var(--danger);
+      color: #fff;
+    }
+
+    .feedback-box {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      display: none;
+    }
+
+    .feedback-box.show {
+      display: block;
+    }
+
+    .feedback-box.correct {
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      color: #14532d;
+    }
+
+    .feedback-box.wrong {
+      background: #fef2f2;
+      border: 1.5px solid #fca5a5;
+      color: #7f1d1d;
+    }
+
+    .feedback-title {
+      font-weight: 800;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* MATH STYLING */
+    .math {
+      font-family: "Cambria Math", "Times New Roman", Times, serif;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .math sub,
+    .math sup {
+      font-style: normal;
+      font-size: 0.76em;
+    }
+
+    .vec {
+      position: relative;
+      display: inline-block;
+      font-family: "Cambria Math", "Times New Roman", Times, serif;
+      font-style: italic;
+      font-weight: 700;
+      padding-top: 2px;
+    }
+
+    .vec::after {
+      content: "→";
+      position: absolute;
+      top: -0.58em;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.72em;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 3px;
+      font-family: "Cambria Math", "Times New Roman", Times, serif;
+      font-style: normal;
+      font-size: 0.95em;
+    }
+
+    .frac > span:first-child {
+      border-bottom: 1.5px solid currentColor;
+      padding: 0 3px 1px;
+    }
+
+    .frac > span:last-child {
+      padding: 1px 3px 0;
+    }
+
+    .sqrt {
+      display: inline-flex;
+      align-items: baseline;
+      font-style: normal;
+      vertical-align: baseline;
+    }
+
+    .sqrt::before {
+      content: "√";
+      font-size: 1.05em;
+      line-height: 1;
+      margin-right: 0.5px;
+    }
+
+    .sqrt > span {
+      border-top: 1.4px solid currentColor;
+      padding: 0 2px;
+      line-height: 1.1;
+    }
+
+    /* LEVEL COMPLETION CALLOUT */
+    .round-summary {
+      margin-top: 20px;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 2px solid #60a5fa;
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      text-align: center;
+      display: none;
+    }
+
+    .round-summary.show {
+      display: block;
+    }
+
+    .round-summary h3 {
+      font-size: 1.2rem;
+      color: #1e3a8a;
+      margin-bottom: 6px;
+    }
+
+    .round-summary p {
+      color: #1e293b;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+
+    .round-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* MODAL REPORT */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      z-index: 900;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--card);
+      border-radius: 16px;
+      max-width: 620px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 22px 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      border: 2px solid #93c5fd;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 14px;
+    }
+
+    .modal-header h2 {
+      font-size: 1.22rem;
+      color: #1e3a8a;
+    }
+
+    .btn-close {
+      background: #f1f5f9;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.92rem;
+    }
+
+    .report-table th,
+    .report-table td {
+      border: 1px solid var(--border);
+      padding: 9px 12px;
+      text-align: left;
+    }
+
+    .report-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+    }
+
+    .history-list {
+      max-height: 150px;
+      overflow-y: auto;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.84rem;
+      margin-top: 8px;
+    }
+
+    .history-item {
+      padding: 4px 0;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div id="soundToast" class="sound-toast"></div>
+
+  <div class="container">
+    <!-- HEADER -->
+    <header class="app-header">
+      <div class="header-title">
+        <h1>💥 CHỦ ĐỀ 29: ĐỊNH LUẬT BẢO TOÀN ĐỘNG LƯỢNG – VẬT LÍ 10</h1>
+        <p>App luyện tập tương tác • Đảo câu hỏi &amp; đáp án ngẫu nhiên • Chấm đúng/sai tức thì</p>
+      </div>
+      <div class="header-badges">
+        <span class="badge">🎯 Cấp độ 1: 12 câu (Bắt buộc 3 lần 12/12)</span>
+        <span class="badge">🚀 Cấp độ 2 (7–8đ): 5 câu</span>
+        <span class="badge">🏆 Cấp độ 3 (9–10đ): 5 câu</span>
+      </div>
+    </header>
+
+    <!-- 3 NÚT / Ô CHỨC NĂNG RÕ RÀNG -->
+    <section class="controls-panel" aria-label="Bảng điều khiển học sinh">
+      <!-- 1. Ô nhập họ tên, lớp -->
+      <div class="control-box">
+        <div class="control-label">👤 1. Ô NHẬP HỌ TÊN &amp; LỚP HỌC SINH</div>
+        <div class="student-inputs">
+          <input type="text" id="studentName" placeholder="Nhập họ và tên học sinh..." autocomplete="name" />
+          <input type="text" id="studentClass" placeholder="Lớp (VD: 10A1)" />
+        </div>
+      </div>
+
+      <!-- 2. Nút âm thanh xác nhận Đúng/Sai vui nhộn, bất ngờ -->
+      <div class="control-box">
+        <div class="control-label">
+          <span>🔊 2. ÂM THANH ĐÚNG/SAI (VUI NHỘN, BẤT NGỜ)</span>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <button type="button" id="btnToggleSound" class="btn-action btn-sound">
+            <span id="soundIcon">🔊</span>
+            <span id="soundText">Âm thanh: BẬT (Vui nhộn)</span>
+          </button>
+          <button type="button" id="btnTestSound" class="btn-sound-test" title="Nghe thử hiệu ứng âm thanh bất ngờ">
+            🎵 Thử
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Nút báo họ tên, kết quả thực hiện -->
+      <div class="control-box">
+        <div class="control-label">📊 3. BÁO CÁO KẾT QUẢ THỰC HIỆN</div>
+        <button type="button" id="btnShowReport" class="btn-action btn-report">
+          📋 Báo Họ Tên &amp; Kết Quả Thực Hiện
+        </button>
+      </div>
+    </section>
+
+    <!-- THANH TIẾN ĐỘ MỞ KHÓA CẤP ĐỘ 1 (BẮT BUỘC 3 LẦN ĐÚNG 12/12, KHÔNG CÓ NÚT MỞ KHÓA GV) -->
+    <section class="unlock-banner">
+      <div class="unlock-info">
+        <div class="unlock-title" id="unlockTitle">
+          🔒 Yêu cầu bắt buộc: Hoàn thành đúng 12/12 câu Cấp độ 1 đủ 3 lần mới mở khóa Cấp độ 2 &amp; 3!
+        </div>
+        <div class="unlock-subtitle" id="unlockSubtitle">
+          Học sinh phải tự làm hết 12 câu Cấp độ 1 và đạt tuyệt đối 12/12 câu đúng trong 3 lượt làm bài (mỗi lượt đảo câu hỏi &amp; đáp án ngẫu nhiên).
+        </div>
+      </div>
+      <div class="stars-box" id="starsBox">
+        <span class="star-pill" id="star1">⭐ Lần 1: Chưa đạt</span>
+        <span class="star-pill" id="star2">⭐ Lần 2: Chưa đạt</span>
+        <span class="star-pill" id="star3">⭐ Lần 3: Chưa đạt</span>
+        <div class="teacher-unlock-box" style="display:inline-flex;align-items:center;gap:6px;margin-left:6px;background:#fff7ed;border:1.5px solid #fdba74;padding:4px 10px;border-radius:999px;">
+          <span style="font-size:0.78rem;font-weight:800;color:#9a3412;">👩‍🏫 GV:</span>
+          <input type="password" id="teacherCodeInput" placeholder="Mã mở khóa..." style="width:92px;padding:3px 8px;border:1px solid #cbd5e1;border-radius:6px;font-size:0.8rem;" onkeydown="if(event.key==='Enter')handleTeacherUnlock()" />
+          <button type="button" id="btnTeacherUnlock" onclick="handleTeacherUnlock()" style="background:#ea580c;color:#fff;border:none;padding:4px 10px;border-radius:6px;font-size:0.78rem;font-weight:800;cursor:pointer;">Mở khóa CĐ 2,3</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHỌN CẤP ĐỘ -->
+    <nav class="level-tabs" aria-label="Các cấp độ bài tập">
+      <button type="button" class="level-tab active" id="tabLevel1" onclick="selectLevel(1)">
+        <div class="level-tab-top">
+          <span class="level-name">🟢 CẤP ĐỘ 1 (Nền tảng)</span>
+          <span class="level-status-badge" id="badgeLevel1">Đang mở • 12 câu</span>
+        </div>
+        <div class="level-desc">Hệ kín, định luật bảo toàn động lượng, va chạm mềm, phản lực, tính 1 bước (Bắt buộc 3 lần 12/12)</div>
+      </button>
+
+      <button type="button" class="level-tab locked" id="tabLevel2" onclick="selectLevel(2)">
+        <div class="level-tab-top">
+          <span class="level-name">🟡 CẤP ĐỘ 2 (Mức 7–8 điểm)</span>
+          <span class="level-status-badge" id="badgeLevel2">🔒 Khóa • 5 câu</span>
+        </div>
+        <div class="level-desc">Bài toán va chạm mềm hai xe, người nhảy khỏi thuyền/xuồng, súng giật lùi</div>
+      </button>
+
+      <button type="button" class="level-tab locked" id="tabLevel3" onclick="selectLevel(3)">
+        <div class="level-tab-top">
+          <span class="level-name">🔴 CẤP ĐỘ 3 (Mức 9–10 điểm)</span>
+          <span class="level-status-badge" id="badgeLevel3">🔒 Khóa • 5 câu</span>
+        </div>
+        <div class="level-desc">Đạn nổ thành 2 mảnh vuông góc/ngược chiều, người nhảy khỏi xe goòng, tên lửa phụt khí</div>
+      </button>
+    </nav>
+
+    <!-- THANH THỐNG KÊ CẤP ĐỘ HIỆN TẠI -->
+    <div class="level-toolbar">
+      <div class="level-stats">
+        <div class="stat-item">Đang làm: <span id="statCurrentLevel">Cấp độ 1</span></div>
+        <div class="stat-item">Đã làm: <span id="statProgress">0 / 12</span> câu</div>
+        <div class="stat-item">Số câu đúng: <span id="statCorrect">0</span></div>
+        <div class="stat-item">Lượt làm CĐ1 thứ: <span id="statAttempt">1</span></div>
+      </div>
+      <button type="button" class="btn-shuffle" onclick="restartCurrentLevel()">
+        🔄 Làm lại &amp; Đảo câu hỏi / đáp án
+      </button>
+    </div>
+
+    <!-- DANH SÁCH CÂU HỎI -->
+    <main id="questionsContainer" class="questions-list"></main>
+
+    <!-- TỔNG KẾT LƯỢT LÀM -->
+    <div id="roundSummary" class="round-summary">
+      <h3 id="summaryTitle">Hoàn thành lượt làm bài!</h3>
+      <p id="summaryText"></p>
+      <div class="round-actions">
+        <button type="button" class="btn-shuffle" onclick="restartCurrentLevel()">
+          🔄 Làm lại cấp độ này (Đảo đề mới)
+        </button>
+        <button type="button" id="btnNextLevel" class="btn-shuffle" style="background:#16a34a; display:none;" onclick="goNextUnlockedLevel()">
+          🚀 Chuyển sang Cấp độ tiếp theo
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL BÁO HỌ TÊN & KẾT QUẢ THỰC HIỆN -->
+  <div id="reportModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>📋 PHIẾU BÁO HỌ TÊN &amp; KẾT QUẢ THỰC HIỆN</h2>
+        <button type="button" class="btn-close" onclick="closeReportModal()">✕</button>
+      </div>
+      <div id="reportBody"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn-shuffle" style="background:#059669;" onclick="copyReportText()">
+          📋 Sao chép kết quả gửi Giáo viên
+        </button>
+        <button type="button" class="btn-shuffle" style="background:#475569;" onclick="closeReportModal()">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. HỆ THỐNG ÂM THANH WEB AUDIO API "VUI NHỘN, BẤT NGỜ"
+    // =========================================================================
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    const FUNNY_CORRECT_MESSAGES = [
+      "🎉 Chuẩn đét! Động năng tri thức đang tăng vọt!",
+      "🚀 Tuyệt vời! Nhớ bài siêu chắc luôn!",
+      "🌟 Bất ngờ chưa! Một pha áp dụng công thức 10 điểm!",
+      "🏆 Quá xuất sắc! Không một chút sai sót!",
+      "⚡ Năng lượng tích cực đạt cực đại! Tiếp tục phát huy nhé!",
+      "🎯 Bách phát bách trúng! Thầy/cô rất tự hào về em!"
+    ];
+
+    const FUNNY_WRONG_MESSAGES = [
+      "🙊 Ối dồi ôi! Nhầm công thức tí xíu rồi, xem giải thích ngay nhé!",
+      "🐸 Úi chà! Cẩn thận hệ số 1/2 hoặc đơn vị chuẩn SI nha!",
+      "💡 Suýt đúng! Đọc kĩ lời giải bên dưới để gỡ lại ở lượt sau nhé!",
+      "🎢 Cú trượt bất ngờ! Xem lại hướng dẫn giải để nhớ thật lâu nào!",
+      "🔧 Chưa chính xác rồi! Bình tĩnh đọc công thức bên dưới nha!"
+    ];
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) {
+          audioCtx = new AudioContextClass();
+        }
+      }
+      if (audioCtx && audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTone(freq, type, startTime, duration, vol = 0.18, slideTo = null) {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, startTime);
+      if (slideTo) {
+        osc.frequency.exponentialRampToValueAtTime(slideTo, startTime + duration);
+      }
+      gain.gain.setValueAtTime(0.001, startTime);
+      gain.gain.linearRampToValueAtTime(vol, startTime + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    }
+
+    function playFunnySound(isCorrect) {
+      const msgList = isCorrect ? FUNNY_CORRECT_MESSAGES : FUNNY_WRONG_MESSAGES;
+      const randomMsg = msgList[Math.floor(Math.random() * msgList.length)];
+      showSoundToast(randomMsg, isCorrect);
+
+      if (!soundEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+
+      if (isCorrect) {
+        const style = Math.floor(Math.random() * 3);
+        if (style === 0) {
+          playTone(523.25, "triangle", now, 0.09, 0.22);
+          playTone(659.25, "triangle", now + 0.09, 0.09, 0.22);
+          playTone(783.99, "triangle", now + 0.18, 0.09, 0.22);
+          playTone(1046.5, "sine", now + 0.27, 0.28, 0.26);
+        } else if (style === 1) {
+          playTone(330, "sine", now, 0.2, 0.2, 990);
+          playTone(987.77, "triangle", now + 0.21, 0.08, 0.22);
+          playTone(1318.5, "sine", now + 0.29, 0.26, 0.25);
+        } else {
+          const notes = [440, 554.37, 659.25, 880, 1108.73];
+          notes.forEach((n, idx) => {
+            playTone(n, "square", now + idx * 0.065, 0.09, 0.12);
+          });
+        }
+      } else {
+        const style = Math.floor(Math.random() * 3);
+        if (style === 0) {
+          playTone(392.0, "sawtooth", now, 0.16, 0.14, 370.0);
+          playTone(369.99, "sawtooth", now + 0.17, 0.16, 0.14, 349.23);
+          playTone(349.23, "sawtooth", now + 0.34, 0.32, 0.16, 261.63);
+        } else if (style === 1) {
+          playTone(180, "sine", now, 0.18, 0.24, 520);
+          playTone(520, "sine", now + 0.18, 0.24, 0.2, 150);
+        } else {
+          playTone(220, "triangle", now, 0.15, 0.2, 160);
+          playTone(160, "sawtooth", now + 0.16, 0.26, 0.16, 110);
+        }
+      }
+    }
+
+    function playUnlockFanfare() {
+      if (!soundEnabled) return;
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const melody = [523.25, 659.25, 783.99, 1046.5, 783.99, 1046.5];
+      const durs = [0.1, 0.1, 0.1, 0.18, 0.1, 0.35];
+      let t = now;
+      melody.forEach((f, i) => {
+        playTone(f, "triangle", t, durs[i], 0.25);
+        t += durs[i] + 0.02;
+      });
+    }
+
+    let toastTimer = null;
+    function showSoundToast(message, isCorrect) {
+      const toast = document.getElementById("soundToast");
+      toast.textContent = message;
+      toast.className = "sound-toast show " + (isCorrect ? "correct" : "wrong");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2600);
+    }
+
+    document.getElementById("btnToggleSound").addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      const btn = document.getElementById("btnToggleSound");
+      const icon = document.getElementById("soundIcon");
+      const text = document.getElementById("soundText");
+      if (soundEnabled) {
+        btn.classList.remove("muted");
+        icon.textContent = "🔊";
+        text.textContent = "Âm thanh: BẬT (Vui nhộn)";
+        playFunnySound(true);
+      } else {
+        btn.classList.add("muted");
+        icon.textContent = "🔇";
+        text.textContent = "Âm thanh: TẮT";
+      }
+    });
+
+    document.getElementById("btnTestSound").addEventListener("click", () => {
+      soundEnabled = true;
+      const btn = document.getElementById("btnToggleSound");
+      btn.classList.remove("muted");
+      document.getElementById("soundIcon").textContent = "🔊";
+      document.getElementById("soundText").textContent = "Âm thanh: BẬT (Vui nhộn)";
+      playFunnySound(Math.random() > 0.35);
+    });
+
+    // =========================================================================
+    // 2. NGÂN HÀNG CÂU HỎI CHỦ ĐỀ 25 - ĐỘNG NĂNG, THẾ NĂNG (BÁM SÁT FILE CH25)
+    // =========================================================================
+    const QUESTIONS_DB = {
+      // -----------------------------------------------------------------------
+      // CẤP ĐỘ 1: 12 CÂU NHẬN BIẾT ĐƠN GIẢN, CÔNG THỨC, LÝ THUYẾT, TÍNH 1 BƯỚC
+      // -----------------------------------------------------------------------
+      1: [
+        {
+          id: "CH29_L1_Q1",
+          tag: "Nhận biết • Định luật bảo toàn động lượng",
+          question: "Chọn câu phát biểu <b>đúng nhất</b> về định luật bảo toàn động lượng:",
+          svg: `
+            <svg viewBox="0 0 430 115" width="410" height="110" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="16" width="390" height="82" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+              <text x="215" y="42" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1e3a8a">Trong một HỆ KÍN (Hệ cô lập):</text>
+              <text x="215" y="72" text-anchor="middle" font-size="15" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="10">1</tspan> + <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="10">2</tspan> + … = <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="10">1</tspan>′ + <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="10">2</tspan>′ + … = không đổi</text>
+            </svg>
+          `,
+          options: [
+            "Vectơ động lượng toàn phần của hệ kín được bảo toàn.",
+            "Động lượng của mọi hệ vật luôn được bảo toàn.",
+            "Vectơ động lượng của mỗi vật trong hệ luôn không đổi.",
+            "Định luật bảo toàn động lượng chỉ đúng khi hệ có ma sát lớn."
+          ],
+          correctIndex: 0,
+          explanation: "Định luật bảo toàn động lượng: <b>Vectơ động lượng toàn phần của một hệ kín (hệ cô lập) là một đại lượng bảo toàn</b>."
+        },
+        {
+          id: "CH29_L1_Q2",
+          tag: "Nhận biết • Điều kiện áp dụng ĐLBT động lượng",
+          question: "Định luật bảo toàn động lượng chỉ đúng trong trường hợp nào sau đây?",
+          svg: `
+            <svg viewBox="0 0 420 110" width="400" height="105" xmlns="http://www.w3.org/2000/svg">
+              <rect x="25" y="18" width="370" height="74" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+              <text x="210" y="45" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">Điều kiện bảo toàn động lượng: HỆ KÍN (HỆ CÔ LẬP)</text>
+              <text x="210" y="72" text-anchor="middle" font-size="12.5" fill="#1e293b">Không có ngoại lực hoặc tổng ngoại lực bằng 0 (hay nội lực ≫ ngoại lực)</text>
+            </svg>
+          `,
+          options: [
+            "Hệ cô lập (hệ kín).",
+            "Hệ có ma sát lớn.",
+            "Hệ kín có ma sát ngoại lực đáng kể.",
+            "Mọi hệ bất kỳ trong tự nhiên."
+          ],
+          correctIndex: 0,
+          explanation: "Định luật bảo toàn động lượng chỉ áp dụng cho <b>hệ cô lập (hệ kín)</b> hoặc hệ gần đúng cô lập (như va chạm, đạn nổ trong thời gian rất ngắn)."
+        },
+        {
+          id: "CH29_L1_Q3",
+          tag: "Nhận biết • Khái niệm hệ kín",
+          question: "Phát biểu nào sau đây nói về <b>hệ kín</b> là <b>không đúng</b>?",
+          svg: `
+            <svg viewBox="0 0 430 115" width="410" height="110" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="18" width="390" height="78" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+              <text x="215" y="42" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">Hệ kín (Hệ cô lập):</text>
+              <text x="215" y="64" text-anchor="middle" font-size="12" fill="#1e293b">• Chỉ có nội lực tương tác giữa các vật trong hệ (hoặc tổng ngoại lực = 0)</text>
+              <text x="215" y="84" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">• Khi nổ / va chạm: Nội lực rất lớn so với ngoại lực ⇒ Hệ gần kín</text>
+            </svg>
+          `,
+          options: [
+            "Hệ kín là hệ có ngoại lực rất lớn so với nội lực.",
+            "Hệ kín là hệ chỉ có các nội lực tương tác giữa các vật trong hệ, không có ngoại lực.",
+            "Hệ kín là hệ có các ngoại lực tác dụng lên hệ cân bằng nhau.",
+            "Hệ được coi là gần kín nếu nội lực rất lớn so với ngoại lực (như vụ nổ, va chạm)."
+          ],
+          correctIndex: 0,
+          explanation: "Hệ được coi là gần kín khi <b>nội lực rất lớn so với ngoại lực</b>. Do đó phát biểu nói \"Hệ kín là hệ có ngoại lực rất lớn so với nội lực\" là <b>sai</b>."
+        },
+        {
+          id: "CH29_L1_Q4",
+          tag: "Nhận biết • Hiện tượng va chạm mềm",
+          question: "Va chạm nào sau đây là <b>va chạm mềm</b>?",
+          svg: `
+            <svg viewBox="0 0 440 120" width="420" height="115" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="92" x2="420" y2="92" stroke="#475569" stroke-width="2.5"/>
+              <circle cx="55" cy="64" r="7" fill="#dc2626"/>
+              <line x1="62" y1="64" x2="115" y2="64" stroke="#dc2626" stroke-width="2.5"/>
+              <polygon points="113,59 123,64 113,69" fill="#dc2626"/>
+              <text x="88" y="50" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan>, <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan></text>
+              <rect x="135" y="42" width="55" height="50" rx="8" fill="#fed7aa" stroke="#c2410c" stroke-width="2"/>
+              <text x="162" y="70" text-anchor="middle" font-size="11" font-weight="bold" fill="#9a3412">Bao cát</text>
+              <text x="222" y="68" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e293b">⇒</text>
+              <rect x="255" y="42" width="60" height="50" rx="8" fill="#fed7aa" stroke="#c2410c" stroke-width="2"/>
+              <circle cx="275" cy="64" r="6" fill="#dc2626"/>
+              <line x1="315" y1="64" x2="375" y2="64" stroke="#16a34a" stroke-width="3"/>
+              <polygon points="373,58 385,64 373,70" fill="#16a34a"/>
+              <text x="350" y="48" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#15803d">(<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan>+<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan>), <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">V</tspan></text>
+            </svg>
+          `,
+          options: [
+            "Viên đạn đang bay xuyên vào và nằm gọn trong bao cát.",
+            "Quả bóng đang bay đập vào tường và nảy ra.",
+            "Viên đạn xuyên thủng qua một tấm bia và bay tiếp.",
+            "Quả bóng tennis đập xuống mặt sân rồi nảy lên."
+          ],
+          correctIndex: 0,
+          explanation: "Va chạm mềm là va chạm mà sau đó hai vật <b>dính vào nhau và chuyển động với cùng một vận tốc</b> (như viên đạn bay cắm chặt vào bao cát)."
+        },
+        {
+          id: "CH29_L1_Q5",
+          tag: "Nhận biết • Biểu thức va chạm mềm",
+          question: "Quả cầu A khối lượng <span class='math'>m<sub>1</sub></span> chuyển động với vận tốc <span class='math'><span class='vec'>v</span><sub>1</sub></span> đến va chạm mềm vào quả cầu B khối lượng <span class='math'>m<sub>2</sub></span> đang đứng yên. Sau va chạm, hai quả cầu dính vào nhau và chuyển động với cùng vận tốc <span class='vec'>v</span>. Hệ thức đúng là:",
+          svg: `
+            <svg viewBox="0 0 430 115" width="410" height="110" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="18" width="390" height="76" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+              <text x="215" y="45" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a8a">Bảo toàn động lượng trong va chạm mềm (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="9.5">2</tspan> = 0):</text>
+              <text x="215" y="74" text-anchor="middle" font-size="15.5" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10.5">1</tspan><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="10.5">1</tspan> = (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10.5">1</tspan> + <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="10.5">2</tspan>)<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan></text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>m<sub>1</sub><span class='vec'>v</span><sub>1</sub> = (m<sub>1</sub> + m<sub>2</sub>)<span class='vec'>v</span></span>.",
+            "<span class='math'>m<sub>1</sub><span class='vec'>v</span><sub>1</sub> = -m<sub>2</sub><span class='vec'>v</span></span>.",
+            "<span class='math'>m<sub>1</sub><span class='vec'>v</span><sub>1</sub> = m<sub>2</sub><span class='vec'>v</span></span>.",
+            "<span class='math'>m<sub>1</sub><span class='vec'>v</span><sub>1</sub> = <span class='frac'><span>1</span><span>2</span></span>(m<sub>1</sub> + m<sub>2</sub>)<span class='vec'>v</span></span>."
+          ],
+          correctIndex: 0,
+          explanation: "Trước va chạm: <span class='math'><span class='vec'>p</span><sub>trước</sub> = m<sub>1</sub><span class='vec'>v</span><sub>1</sub></span> (vì <span class='math'>m<sub>2</sub></span> đứng yên). Sau va chạm mềm, hai vật dính vào nhau có khối lượng <span class='math'>(m<sub>1</sub> + m<sub>2</sub>)</span> chuyển động cùng vận tốc <span class='vec'>v</span> nên: <span class='math'>m<sub>1</sub><span class='vec'>v</span><sub>1</sub> = (m<sub>1</sub> + m<sub>2</sub>)<span class='vec'>v</span></span>."
+        },
+        {
+          id: "CH29_L1_Q6",
+          tag: "Nhận biết • Đặc điểm năng lượng trong va chạm mềm",
+          question: "Trong trường hợp hai vật cô lập va chạm mềm trực diện với nhau, động năng của hệ ngay trước và ngay sau va chạm lần lượt là <span class='math'>W<sub>đ</sub></span> và <span class='math'>W<sub>đ</sub>&prime;</span>. Hệ thức nào sau đây là <b>đúng</b>?",
+          svg: `
+            <svg viewBox="0 0 430 110" width="410" height="105" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="16" width="390" height="76" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+              <text x="215" y="42" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">Va chạm mềm: Động lượng bảo toàn, nhưng Động năng GIẢM</text>
+              <text x="215" y="70" text-anchor="middle" font-size="14" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">W</tspan><tspan baseline-shift="sub" font-size="10">đ</tspan> &gt; <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">W</tspan><tspan baseline-shift="sub" font-size="10">đ</tspan>′  (Một phần chuyển thành nhiệt năng &amp; biến dạng)</text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>W<sub>đ</sub> &gt; W<sub>đ</sub>&prime;</span>.",
+            "<span class='math'>W<sub>đ</sub> = W<sub>đ</sub>&prime;</span>.",
+            "<span class='math'>W<sub>đ</sub> &lt; W<sub>đ</sub>&prime;</span>.",
+            "<span class='math'>W<sub>đ</sub> = 2W<sub>đ</sub>&prime;</span>."
+          ],
+          correctIndex: 0,
+          explanation: "Trong va chạm mềm, một phần động năng của hệ đã chuyển hóa thành nội năng (tỏa nhiệt) và công làm biến dạng vật, nên <b>cơ năng (động năng) không bảo toàn</b>: <span class='math'>W<sub>đ</sub> &gt; W<sub>đ</sub>&prime;</span>."
+        },
+        {
+          id: "CH29_L1_Q7",
+          tag: "Nhận biết • Chuyển động bằng phản lực",
+          question: "Hiện tượng súng giật lùi về phía sau khi bắn và sự chuyển động của tên lửa tuân theo định luật vật lí nào?",
+          svg: `
+            <svg viewBox="0 0 430 115" width="410" height="110" xmlns="http://www.w3.org/2000/svg">
+              <rect x="155" y="42" width="110" height="30" rx="12" fill="#2563eb"/>
+              <polygon points="265,42 295,57 265,72" fill="#1d4ed8"/>
+              <text x="210" y="61" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff">Tên lửa (M)</text>
+              <line x1="295" y1="57" x2="375" y2="57" stroke="#16a34a" stroke-width="3"/>
+              <polygon points="373,51 385,57 373,63" fill="#16a34a"/>
+              <text x="345" y="43" text-anchor="middle" font-size="12" font-weight="bold" fill="#15803d"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">M · V</tspan></text>
+              <line x1="155" y1="57" x2="65" y2="57" stroke="#dc2626" stroke-width="3"/>
+              <polygon points="67,51 55,57 67,63" fill="#dc2626"/>
+              <text x="105" y="43" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">Khí phụt (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m · v</tspan>)</text>
+              <text x="215" y="100" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#0f172a">Chuyển động bằng phản lực: <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m · v + M · V = 0</tspan></text>
+            </svg>
+          `,
+          options: [
+            "Định luật bảo toàn động lượng.",
+            "Định luật bảo toàn công.",
+            "Định luật vạn vật hấp dẫn.",
+            "Định luật Hooke."
+          ],
+          correctIndex: 0,
+          explanation: "Chuyển động bằng phản lực (súng giật lùi khi bắn, tên lửa phóng đi khi phụt khí) hoạt động dựa trên <b>định luật bảo toàn động lượng</b>."
+        },
+        {
+          id: "CH29_L1_Q8",
+          tag: "Nhận biết • Quy luật hướng trong chuyển động phản lực",
+          question: "Trong chuyển động bằng phản lực của một hệ đứng yên ban đầu, nếu có một phần của hệ chuyển động theo một hướng thì phần còn lại của hệ:",
+          svg: `
+            <svg viewBox="0 0 420 105" width="400" height="100" xmlns="http://www.w3.org/2000/svg">
+              <rect x="25" y="16" width="370" height="72" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+              <text x="210" y="44" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#15803d"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m · v + M · V = 0  ⇒  V = −(m / M) · v</tspan></text>
+              <text x="210" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#dc2626">⇒ Hai phần chuyển động cùng phương, NGƯỢC CHIỀU nhau!</text>
+            </svg>
+          `,
+          options: [
+            "phải chuyển động theo hướng ngược lại.",
+            "phải đứng yên tại chỗ.",
+            "phải chuyển động theo cùng một hướng.",
+            "phải chuyển động theo hướng vuông góc."
+          ],
+          correctIndex: 0,
+          explanation: "Theo định luật bảo toàn động lượng: <span class='math'>m<span class='vec'>v</span> + M<span class='vec'>V</span> = <span class='vec'>0</span> &Rightarrow; <span class='vec'>V</span> = -<span class='frac'><span>m</span><span>M</span></span><span class='vec'>v</span></span>, nghĩa là phần còn lại <b>chuyển động theo hướng ngược lại</b>."
+        },
+        {
+          id: "CH29_L1_Q9",
+          tag: "Thông hiểu • So sánh động năng và động lượng",
+          question: "Hai vật có cùng khối lượng <span class='math'>m</span>, chuyển động với cùng tốc độ <span class='math'>v</span> nhưng một vật bay theo phương nằm ngang và một vật bay theo phương thẳng đứng. Hai vật này có:",
+          svg: `
+            <svg viewBox="0 0 430 120" width="410" height="115" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="65" cy="70" r="14" fill="#2563eb"/>
+              <line x1="79" y1="70" x2="145" y2="70" stroke="#2563eb" stroke-width="2.8"/>
+              <polygon points="143,65 153,70 143,75" fill="#2563eb"/>
+              <text x="115" y="56" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1d4ed8"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan> (ngang)</text>
+              <circle cx="195" cy="85" r="14" fill="#dc2626"/>
+              <line x1="195" y1="71" x2="195" y2="20" stroke="#dc2626" stroke-width="2.8"/>
+              <polygon points="190,22 195,12 200,22" fill="#dc2626"/>
+              <text x="228" y="45" font-size="11.5" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan> (đứng)</text>
+              <rect x="260" y="22" width="155" height="75" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+              <text x="337" y="48" text-anchor="middle" font-size="12" font-weight="bold" fill="#15803d">Cùng <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">W</tspan><tspan baseline-shift="sub" font-size="9">đ</tspan> (vô hướng)</text>
+              <text x="337" y="74" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">Khác <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan> (vì khác hướng)</text>
+            </svg>
+          `,
+          options: [
+            "cùng động năng nhưng động lượng khác nhau.",
+            "cùng động năng và cùng động lượng.",
+            "cùng động lượng nhưng động năng khác nhau.",
+            "cả động năng và động lượng đều khác nhau."
+          ],
+          correctIndex: 0,
+          explanation: "Động năng <span class='math'>W<sub>đ</sub> = <span class='frac'><span>1</span><span>2</span></span>mv<sup>2</sup></span> là đại lượng vô hướng nên hai vật có <b>cùng động năng</b>. Động lượng <span class='math'><span class='vec'>p</span> = m<span class='vec'>v</span></span> là đại lượng vectơ, hai vật chuyển động theo hai phương vuông góc nên hai vectơ động lượng <b>khác nhau về hướng</b>."
+        },
+        {
+          id: "CH29_L1_Q10",
+          tag: "Phép tính 1 bước • Va chạm mềm hai xe cùng khối lượng",
+          question: "Một chiếc xe chạy trên đường ngang không ma sát với vận tốc <span class='math'>v<sub>1</sub></span> = 10 m/s đến va chạm mềm vào một chiếc xe thứ hai đang đứng yên có cùng khối lượng (<span class='math'>m<sub>1</sub> = m<sub>2</sub> = m</span>). Ngay sau va chạm, tốc độ chung của hai xe là:",
+          svg: `
+            <svg viewBox="0 0 430 115" width="410" height="110" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="88" x2="410" y2="88" stroke="#475569" stroke-width="2.5"/>
+              <rect x="35" y="52" width="60" height="30" rx="6" fill="#2563eb"/>
+              <text x="65" y="71" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan></text>
+              <line x1="95" y1="67" x2="150" y2="67" stroke="#2563eb" stroke-width="2.8"/>
+              <polygon points="148,62 158,67 148,72" fill="#2563eb"/>
+              <text x="125" y="52" text-anchor="middle" font-size="11" font-weight="bold" fill="#1d4ed8">10 m/s</text>
+              <rect x="170" y="52" width="60" height="30" rx="6" fill="#64748b"/>
+              <text x="200" y="71" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan> (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan>=0)</text>
+              <rect x="255" y="24" width="160" height="62" rx="10" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+              <text x="335" y="48" text-anchor="middle" font-size="12" font-weight="bold" fill="#15803d"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m · v</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> = (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m + m</tspan>)<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">V</tspan></text>
+              <text x="335" y="72" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f172a">⇒ <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">V = v</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> / 2 = ?</text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>5 m/s</span>.",
+            "<span class='math'>10 m/s</span>.",
+            "<span class='math'>20 m/s</span>.",
+            "<span class='math'>2,5 m/s</span>."
+          ],
+          correctIndex: 0,
+          explanation: "Theo định luật bảo toàn động lượng cho va chạm mềm: <span class='math'>mv<sub>1</sub> = (m + m)V &Rightarrow; V = <span class='frac'><span>v<sub>1</sub></span><span>2</span></span> = <span class='frac'><span>10</span><span>2</span></span> = 5</span> m/s."
+        },
+        {
+          id: "CH29_L1_Q11",
+          tag: "Phép tính 1 bước • Va chạm mềm giữa bi m và 3m",
+          question: "Một hòn bi khối lượng <span class='math'>m</span> đang chuyển động với tốc độ <span class='math'>v</span> đến va chạm mềm vào hòn bi thứ hai có khối lượng <span class='math'>3m</span> đang nằm yên trên mặt sàn nhẵn ngang. Tốc độ của hai viên bi ngay sau va chạm là:",
+          svg: `
+            <svg viewBox="0 0 430 115" width="410" height="110" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="88" x2="235" y2="88" stroke="#475569" stroke-width="2.5"/>
+              <circle cx="55" cy="68" r="14" fill="#2563eb"/>
+              <text x="55" y="72" text-anchor="middle" font-family="Cambria Math, Times New Roman, serif" font-style="italic" font-size="12" font-weight="bold" fill="#fff">m</text>
+              <line x1="69" y1="68" x2="120" y2="68" stroke="#2563eb" stroke-width="2.8"/>
+              <polygon points="118,63 128,68 118,73" fill="#2563eb"/>
+              <text x="98" y="55" text-anchor="middle" font-family="Cambria Math, Times New Roman, serif" font-style="italic" font-size="13" font-weight="bold" fill="#1d4ed8">v</text>
+              <circle cx="170" cy="62" r="22" fill="#f59e0b"/>
+              <text x="170" y="66" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff">3<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan></text>
+              <rect x="245" y="22" width="170" height="68" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+              <text x="330" y="48" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#92400e"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m · v</tspan> = (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan> + 3<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan>)<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">V</tspan></text>
+              <text x="330" y="74" text-anchor="middle" font-size="14" font-weight="bold" fill="#b45309">⇒ <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">V = v</tspan> / 4</text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'><span class='frac'><span>v</span><span>4</span></span></span>.",
+            "<span class='math'><span class='frac'><span>v</span><span>3</span></span></span>.",
+            "<span class='math'><span class='frac'><span>3v</span><span>5</span></span></span>.",
+            "<span class='math'><span class='frac'><span>v</span><span>2</span></span></span>."
+          ],
+          correctIndex: 0,
+          explanation: "Áp dụng định luật bảo toàn động lượng cho va chạm mềm:<br><span class='math'>mv + 3m &middot; 0 = (m + 3m)V &Rightarrow; 4mV = mv &Rightarrow; V = <span class='frac'><span>v</span><span>4</span></span></span>."
+        },
+        {
+          id: "CH29_L1_Q12",
+          tag: "Phép tính 1 bước • Tính vận tốc giật lùi của súng",
+          question: "Một khẩu súng có khối lượng <span class='math'>M</span> = 4 kg bắn ra một viên đạn có khối lượng <span class='math'>m</span> = 25 g. Lúc thoát khỏi nòng súng, đạn có tốc độ <span class='math'>v</span> = 800 m/s. Độ lớn vận tốc giật lùi của súng là:",
+          svg: `
+            <svg viewBox="0 0 430 115" width="410" height="110" xmlns="http://www.w3.org/2000/svg">
+              <rect x="115" y="45" width="85" height="24" rx="5" fill="#334155"/>
+              <text x="157" y="61" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Súng 4 kg</text>
+              <line x1="115" y1="57" x2="45" y2="57" stroke="#dc2626" stroke-width="3"/>
+              <polygon points="47,51 35,57 47,63" fill="#dc2626"/>
+              <text x="75" y="43" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">V</tspan> = ?</text>
+              <circle cx="230" cy="57" r="6" fill="#ea580c"/>
+              <line x1="236" y1="57" x2="320" y2="57" stroke="#16a34a" stroke-width="3"/>
+              <polygon points="318,51 330,57 318,63" fill="#16a34a"/>
+              <text x="285" y="43" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#15803d"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan> = 800 m/s (25 g)</text>
+              <text x="215" y="96" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1e3a8a"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">M · V = m · v  ⇒  V = (m · v) / M</tspan></text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>5 m/s</span>.",
+            "<span class='math'>6 m/s</span>.",
+            "<span class='math'>7 m/s</span>.",
+            "<span class='math'>12 m/s</span>."
+          ],
+          correctIndex: 0,
+          explanation: "Đổi <span class='math'>m</span> = 25 g = 0,025 kg.<br>Áp dụng định luật bảo toàn động lượng: <span class='math'>MV = mv &Rightarrow; V = <span class='frac'><span>m &middot; v</span><span>M</span></span> = <span class='frac'><span>0,025 &middot; 800</span><span>4</span></span> = 5</span> m/s."
+        }
+      ],
+
+      // -----------------------------------------------------------------------
+      // CẤP ĐỘ 2: 5 CÂU (MỨC 7 - 8 ĐIỂM: THÔNG HIỂU & VẬN DỤNG)
+      // -----------------------------------------------------------------------
+      2: [
+        {
+          id: "CH29_L2_Q1",
+          tag: "Mức 7–8 điểm • Người nhảy từ xuồng lên bờ",
+          question: "Hệ kín gồm người và xuồng đang đứng yên trên mặt nước. Khối lượng của người là <span class='math'>m</span> = 60 kg, của xuồng là <span class='math'>M</span> = 200 kg. Khi người nhảy từ xuồng lên bờ theo phương ngang với vận tốc <span class='math'>v</span> = 5 m/s thì tốc độ trôi dạt ra phía ngoài của xuồng là:",
+          svg: `
+            <svg viewBox="0 0 440 120" width="420" height="115" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 15 88 Q 220 96 425 88" fill="none" stroke="#0284c7" stroke-width="3"/>
+              <polygon points="110,65 240,65 220,88 130,88" fill="#f59e0b" stroke="#b45309" stroke-width="2"/>
+              <text x="175" y="81" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff">Xuồng 200 kg</text>
+              <line x1="115" y1="74" x2="45" y2="74" stroke="#dc2626" stroke-width="3"/>
+              <polygon points="47,68 35,74 47,80" fill="#dc2626"/>
+              <text x="72" y="60" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">V</tspan> = ?</text>
+              <circle cx="245" cy="36" r="9" fill="#16a34a"/>
+              <line x1="254" y1="36" x2="335" y2="36" stroke="#16a34a" stroke-width="3"/>
+              <polygon points="333,30 345,36 333,42" fill="#16a34a"/>
+              <text x="295" y="24" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#15803d">Người 60 kg (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan> = 5 m/s)</text>
+              <text x="220" y="110" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1e3a8a">Bảo toàn động lượng: <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m · v = M · V  ⇒  V = (m · v) / M</tspan></text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>1,5 m/s</span>.",
+            "<span class='math'>2,0 m/s</span>.",
+            "<span class='math'>2,5 m/s</span>.",
+            "<span class='math'>3,0 m/s</span>."
+          ],
+          correctIndex: 0,
+          explanation: "Áp dụng định luật bảo toàn động lượng cho hệ kín (người + xuồng) theo phương ngang:<br><span class='math'>0 = mv - MV &Rightarrow; V = <span class='frac'><span>m &middot; v</span><span>M</span></span> = <span class='frac'><span>60 &middot; 5</span><span>200</span></span> = 1,5</span> m/s."
+        },
+        {
+          id: "CH29_L2_Q2",
+          tag: "Mức 7–8 điểm • Va chạm mềm hai xe lăn chuyển động ngược chiều",
+          question: "Hai xe lăn nhỏ có khối lượng <span class='math'>m<sub>1</sub></span> = 500 g và <span class='math'>m<sub>2</sub></span> = 2 kg chuyển động trên mặt phẳng ngang <b>ngược chiều</b> nhau với các tốc độ tương ứng <span class='math'>v<sub>1</sub></span> = 2 m/s và <span class='math'>v<sub>2</sub></span> = 0,8 m/s. Sau khi va chạm, hai xe dính vào nhau và chuyển động với cùng vận tốc. Bỏ qua sức cản. Độ lớn vận tốc của hai xe ngay sau va chạm là:",
+          svg: `
+            <svg viewBox="0 0 440 120" width="420" height="115" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="86" x2="420" y2="86" stroke="#475569" stroke-width="2.5"/>
+              <rect x="45" y="52" width="65" height="28" rx="6" fill="#2563eb"/>
+              <text x="77" y="70" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">0,5 kg</text>
+              <line x1="110" y1="66" x2="175" y2="66" stroke="#2563eb" stroke-width="2.8"/>
+              <polygon points="173,61 183,66 173,71" fill="#2563eb"/>
+              <text x="145" y="50" text-anchor="middle" font-size="11" font-weight="bold" fill="#1d4ed8"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan> = 2 m/s</text>
+              <rect x="295" y="46" width="85" height="34" rx="6" fill="#dc2626"/>
+              <text x="337" y="67" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff">2 kg</text>
+              <line x1="295" y1="66" x2="225" y2="66" stroke="#dc2626" stroke-width="2.8"/>
+              <polygon points="227,61 217,66 227,71" fill="#dc2626"/>
+              <text x="255" y="50" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan> = 0,8 m/s</text>
+              <text x="220" y="108" text-anchor="middle" font-size="12" font-weight="bold" fill="#15803d">Ngược chiều: <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">V</tspan> = |<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> − <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">2</tspan><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>| / (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> + <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>)</text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>0,24 m/s</span>.",
+            "<span class='math'>0,63 m/s</span>.",
+            "<span class='math'>1,24 m/s</span>.",
+            "<span class='math'>1,04 m/s</span>."
+          ],
+          correctIndex: 0,
+          explanation: "Đổi <span class='math'>m<sub>1</sub></span> = 0,5 kg. Chọn chiều dương theo chiều chuyển động của xe 2:<br><span class='math'>(m<sub>1</sub> + m<sub>2</sub>)V = m<sub>2</sub>v<sub>2</sub> - m<sub>1</sub>v<sub>1</sub> &Rightarrow; V = <span class='frac'><span>2 &middot; 0,8 - 0,5 &middot; 2</span><span>0,5 + 2</span></span> = <span class='frac'><span>0,6</span><span>2,5</span></span> = 0,24</span> m/s."
+        },
+        {
+          id: "CH29_L2_Q3",
+          tag: "Mức 7–8 điểm • Va chạm hai quả cầu chuyển động cùng chiều",
+          question: "Một quả cầu khối lượng <span class='math'>m<sub>1</sub></span> = 2 kg chuyển động với vận tốc <span class='math'>v<sub>1</sub></span> = 3 m/s tới va chạm vào quả cầu thứ hai có khối lượng <span class='math'>m<sub>2</sub></span> = 3 kg đang chuyển động cùng chiều với vận tốc <span class='math'>v<sub>2</sub></span> = 1 m/s trên một máng thẳng ngang không ma sát. Sau va chạm, quả cầu thứ nhất chuyển động với vận tốc <span class='math'>v<sub>1</sub>&prime;</span> = 0,6 m/s theo chiều ban đầu. Tốc độ của quả cầu thứ hai sau va chạm bằng:",
+          svg: `
+            <svg viewBox="0 0 440 120" width="420" height="115" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="86" x2="420" y2="86" stroke="#475569" stroke-width="2.5"/>
+              <circle cx="55" cy="64" r="16" fill="#2563eb"/>
+              <text x="55" y="68" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#fff">2 kg</text>
+              <line x1="71" y1="64" x2="125" y2="64" stroke="#2563eb" stroke-width="2.5"/>
+              <polygon points="123,59 133,64 123,69" fill="#2563eb"/>
+              <text x="100" y="50" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1d4ed8">3 m/s</text>
+              <circle cx="165" cy="61" r="19" fill="#16a34a"/>
+              <text x="165" y="65" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">3 kg</text>
+              <line x1="184" y1="61" x2="225" y2="61" stroke="#16a34a" stroke-width="2.5"/>
+              <polygon points="223,56 233,61 223,66" fill="#16a34a"/>
+              <text x="208" y="48" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#15803d">1 m/s</text>
+              <rect x="250" y="22" width="175" height="60" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/>
+              <text x="337" y="46" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#92400e"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan> + <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan> = <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan>′ + <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan>′</text>
+              <text x="337" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">2·3 + 3·1 = 2·0,6 + 3·<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan>′</text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>2,6 m/s</span>.",
+            "<span class='math'>2,8 m/s</span>.",
+            "<span class='math'>4,6 m/s</span>.",
+            "<span class='math'>1,8 m/s</span>."
+          ],
+          correctIndex: 0,
+          explanation: "Chọn chiều dương theo chiều chuyển động ban đầu của hai quả cầu.<br>Áp dụng ĐLBT động lượng: <span class='math'>m<sub>1</sub>v<sub>1</sub> + m<sub>2</sub>v<sub>2</sub> = m<sub>1</sub>v<sub>1</sub>&prime; + m<sub>2</sub>v<sub>2</sub>&prime; &Rightarrow; 2 &middot; 3 + 3 &middot; 1 = 2 &middot; 0,6 + 3v<sub>2</sub>&prime; &Rightarrow; 9 = 1,2 + 3v<sub>2</sub>&prime; &Rightarrow; v<sub>2</sub>&prime; = 2,6</span> m/s."
+        },
+        {
+          id: "CH29_L2_Q4",
+          tag: "Mức 7–8 điểm • Viên đạn xuyên vào bao cát",
+          question: "Một viên đạn khối lượng <span class='math'>m<sub>1</sub></span> = 200 g bay ngang với vận tốc <span class='math'>v<sub>1</sub></span> = 100 m/s đến va chạm mềm và nằm gọn trong một bao cát đang đứng yên có khối lượng <span class='math'>m<sub>2</sub></span> = 100 kg. Tốc độ của bao cát ngay sau va chạm gần bằng:",
+          svg: `
+            <svg viewBox="0 0 430 115" width="410" height="110" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="55" cy="58" r="7" fill="#dc2626"/>
+              <line x1="62" y1="58" x2="125" y2="58" stroke="#dc2626" stroke-width="2.8"/>
+              <polygon points="123,53 133,58 123,63" fill="#dc2626"/>
+              <text x="95" y="44" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">0,2 kg ; 100 m/s</text>
+              <rect x="145" y="32" width="75" height="52" rx="10" fill="#fed7aa" stroke="#c2410c" stroke-width="2"/>
+              <text x="182" y="62" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#9a3412">100 kg</text>
+              <rect x="245" y="22" width="170" height="68" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+              <text x="330" y="48" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">V = m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> / (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> + <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>)</text>
+              <text x="330" y="72" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">V</tspan> = 20 / 100,2 ≈ ?</text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>0,2 m/s</span>.",
+            "<span class='math'>2,1 m/s</span>.",
+            "<span class='math'>6,7 m/s</span>.",
+            "<span class='math'>66,7 m/s</span>."
+          ],
+          correctIndex: 0,
+          explanation: "Đổi <span class='math'>m<sub>1</sub></span> = 0,2 kg. Theo định luật bảo toàn động lượng cho va chạm mềm:<br><span class='math'>V = <span class='frac'><span>m<sub>1</sub>v<sub>1</sub></span><span>m<sub>1</sub> + m<sub>2</sub></span></span> = <span class='frac'><span>0,2 &middot; 100</span><span>0,2 + 100</span></span> &approx; 0,2</span> m/s."
+        },
+        {
+          id: "CH29_L2_Q5",
+          tag: "Mức 7–8 điểm • Bài toán lựu đạn nổ thành hai mảnh cùng phương",
+          question: "Một quả lựu đạn đang bay theo phương ngang với vận tốc <span class='math'>v<sub>0</sub></span> = 10 m/s thì nổ và tách thành hai mảnh có khối lượng <span class='math'>m<sub>1</sub></span> = 1 kg và <span class='math'>m<sub>2</sub></span> = 1,5 kg. Ngay sau khi nổ, mảnh to (<span class='math'>m<sub>2</sub></span>) vẫn chuyển động theo phương ngang cùng chiều ban đầu với tốc độ <span class='math'>v<sub>2</sub></span> = 25 m/s. Tốc độ và chiều chuyển động của mảnh nhỏ (<span class='math'>m<sub>1</sub></span>) là:",
+          svg: `
+            <svg viewBox="0 0 440 120" width="420" height="115" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="65" cy="56" r="18" fill="#475569"/>
+              <text x="65" y="60" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#fff">2,5 kg</text>
+              <line x1="83" y1="56" x2="140" y2="56" stroke="#1e293b" stroke-width="2.5"/>
+              <polygon points="138,51 148,56 138,61" fill="#1e293b"/>
+              <text x="115" y="42" text-anchor="middle" font-size="11" font-weight="bold">10 m/s</text>
+              <text x="172" y="60" text-anchor="middle" font-size="16" font-weight="bold" fill="#dc2626">💥</text>
+              <circle cx="245" cy="56" r="12" fill="#dc2626"/>
+              <line x1="233" y1="56" x2="195" y2="56" stroke="#dc2626" stroke-width="2.5"/>
+              <polygon points="197,51 187,56 197,61" fill="#dc2626"/>
+              <text x="220" y="38" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#dc2626">1 kg (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan>=?)</text>
+              <circle cx="315" cy="56" r="16" fill="#16a34a"/>
+              <line x1="331" y1="56" x2="405" y2="56" stroke="#16a34a" stroke-width="2.8"/>
+              <polygon points="403,51 413,56 403,61" fill="#16a34a"/>
+              <text x="368" y="38" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#15803d">1,5 kg (25 m/s)</text>
+              <text x="220" y="104" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">(<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> + <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>)<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="9">0</tspan> = <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">1</tspan><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> + <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="9">2</tspan><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="9">2</tspan></text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>12,5 m/s</span>; ngược chiều chuyển động ban đầu.",
+            "<span class='math'>12,5 m/s</span>; cùng chiều chuyển động ban đầu.",
+            "<span class='math'>6,25 m/s</span>; ngược chiều chuyển động ban đầu.",
+            "<span class='math'>25,0 m/s</span>; ngược chiều chuyển động ban đầu."
+          ],
+          correctIndex: 0,
+          explanation: "Chọn chiều dương là chiều bay ban đầu của quả lựu đạn.<br>Theo định luật bảo toàn động lượng: <span class='math'>(m<sub>1</sub> + m<sub>2</sub>)v<sub>0</sub> = m<sub>1</sub>v<sub>1</sub> + m<sub>2</sub>v<sub>2</sub> &Rightarrow; (1 + 1,5) &middot; 10 = 1 &middot; v<sub>1</sub> + 1,5 &middot; 25 &Rightarrow; 25 = v<sub>1</sub> + 37,5 &Rightarrow; v<sub>1</sub> = -12,5</span> m/s.<br>Dấu trừ chứng tỏ mảnh nhỏ bay <b>ngược chiều ban đầu</b> với tốc độ <b>12,5 m/s</b>."
+        }
+      ],
+
+      // -----------------------------------------------------------------------
+      // CẤP ĐỘ 3: 5 CÂU (MỨC 9 - 10 ĐIỂM: VẬN DỤNG CAO)
+      // -----------------------------------------------------------------------
+      3: [
+        {
+          id: "CH29_L3_Q1",
+          tag: "Mức 9–10 điểm • Đạn bay ngang nổ thành hai mảnh vuông góc",
+          question: "Một viên đạn đang bay theo phương ngang với tốc độ <span class='math'>v</span> = 100 m/s thì nổ thành hai mảnh có khối lượng <span class='math'>m<sub>1</sub></span> = 8 kg và <span class='math'>m<sub>2</sub></span> = 4 kg. Mảnh nhỏ (<span class='math'>m<sub>2</sub></span>) bay thẳng đứng lên trên với tốc độ <span class='math'>v<sub>2</sub></span> = 225 m/s. Bỏ qua sức cản không khí. Độ lớn vận tốc của mảnh lớn (<span class='math'>m<sub>1</sub></span>) ngay sau khi nổ là:",
+          svg: `
+            <svg viewBox="0 0 440 135" width="420" height="130" xmlns="http://www.w3.org/2000/svg">
+              <line x1="50" y1="68" x2="155" y2="68" stroke="#2563eb" stroke-width="3"/>
+              <polygon points="153,62 165,68 153,74" fill="#2563eb"/>
+              <line x1="50" y1="68" x2="50" y2="15" stroke="#16a34a" stroke-width="3"/>
+              <polygon points="44,17 50,7 56,17" fill="#16a34a"/>
+              <line x1="50" y1="68" x2="158" y2="118" stroke="#dc2626" stroke-width="3"/>
+              <polygon points="154,112 165,121 150,122" fill="#dc2626"/>
+              <line x1="165" y1="68" x2="165" y2="121" stroke="#94a3b8" stroke-dasharray="3,3"/>
+              <rect x="50" y="56" width="12" height="12" fill="none" stroke="#475569" stroke-width="1.5"/>
+              <text x="115" y="58" text-anchor="middle" font-size="11" font-weight="bold" fill="#1d4ed8"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan> = 1200</text>
+              <text x="85" y="24" font-size="11" font-weight="bold" fill="#15803d"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan> = 900</text>
+              <text x="95" y="112" font-size="11.5" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan> = ?</text>
+              <rect x="215" y="22" width="210" height="86" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+              <text x="320" y="45" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e3a8a"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan> = (8+4)·100 = 1200 ; <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan> = 4·225 = 900</text>
+              <text x="320" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">Vì <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan> ⊥ <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan> ⇒ <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan><tspan baseline-shift="super" font-size="8.5">2</tspan> = <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="super" font-size="8.5">2</tspan> + <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan><tspan baseline-shift="super" font-size="8.5">2</tspan></text>
+              <text x="320" y="94" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#15803d">⇒ <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan> = 1500 ⇒ <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan> = <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan> / <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan></text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>187,5 m/s</span>.",
+            "<span class='math'>165,8 m/s</span>.",
+            "<span class='math'>201,6 m/s</span>.",
+            "<span class='math'>234,1 m/s</span>."
+          ],
+          correctIndex: 0,
+          explanation: "• Động lượng ban đầu của đạn (ngang): <span class='math'>p = (m<sub>1</sub> + m<sub>2</sub>)v = 12 &middot; 100 = 1200</span> kg&middot;m/s.<br>• Động lượng mảnh nhỏ (thẳng đứng): <span class='math'>p<sub>2</sub> = m<sub>2</sub>v<sub>2</sub> = 4 &middot; 225 = 900</span> kg&middot;m/s.<br>• Vì <span class='math'><span class='vec'>p</span> = <span class='vec'>p</span><sub>1</sub> + <span class='vec'>p</span><sub>2</sub></span> và <span class='math'><span class='vec'>p</span><sub>2</sub> &perp; <span class='vec'>p</span></span> nên <span class='math'>p<sub>1</sub> = <span class='sqrt'><span>p<sup>2</sup> + p<sub>2</sub><sup>2</sup></span></span> = <span class='sqrt'><span>1200<sup>2</sup> + 900<sup>2</sup></span></span> = 1500</span> kg&middot;m/s.<br>• Tốc độ của mảnh lớn: <span class='math'>v<sub>1</sub> = <span class='frac'><span>p<sub>1</sub></span><span>m<sub>1</sub></span></span> = <span class='frac'><span>1500</span><span>8</span></span> = 187,5</span> m/s."
+        },
+        {
+          id: "CH29_L3_Q2",
+          tag: "Mức 9–10 điểm • Người nhảy khỏi xe goòng đang chạy",
+          question: "Một người khối lượng <span class='math'>m<sub>1</sub></span> = 60 kg đứng trên một xe goòng khối lượng <span class='math'>m<sub>2</sub></span> = 240 kg đang chuyển động thẳng đều trên đường ray nằm ngang với tốc độ <span class='math'>v</span> = 2 m/s. Khi người nhảy ra khỏi xe về phía trước với vận tốc 4 m/s <b>đối với xe</b> thì tốc độ của xe goòng ngay sau đó là:",
+          svg: `
+            <svg viewBox="0 0 440 125" width="420" height="120" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="90" x2="420" y2="90" stroke="#475569" stroke-width="2.5"/>
+              <rect x="45" y="52" width="110" height="30" rx="6" fill="#2563eb"/>
+              <circle cx="68" cy="84" r="7" fill="#0f172a"/>
+              <circle cx="132" cy="84" r="7" fill="#0f172a"/>
+              <text x="100" y="71" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">Xe 240 kg (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan>′=?)</text>
+              <circle cx="185" cy="40" r="9" fill="#16a34a"/>
+              <line x1="194" y1="40" x2="255" y2="40" stroke="#16a34a" stroke-width="2.8"/>
+              <polygon points="253,35 263,40 253,45" fill="#16a34a"/>
+              <text x="215" y="25" text-anchor="middle" font-size="11" font-weight="bold" fill="#15803d"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">1/đất</tspan> = 4 + 2 = 6 m/s</text>
+              <rect x="265" y="22" width="160" height="62" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/>
+              <text x="345" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">(60 + 240)·2 = 60·6 + 240·<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan>′</text>
+              <text x="345" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626">⇒ 600 = 360 + 240·<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan>′</text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>1,0 m/s</span>.",
+            "<span class='math'>1,2 m/s</span>.",
+            "<span class='math'>1,5 m/s</span>.",
+            "<span class='math'>1,7 m/s</span>."
+          ],
+          correctIndex: 0,
+          explanation: "Vận tốc của người đối với mặt đất khi nhảy về phía trước là: <span class='math'>v<sub>1</sub>&prime; = v<sub>người/xe</sub> + v<sub>xe</sub> = 4 + 2 = 6</span> m/s.<br>Áp dụng định luật bảo toàn động lượng đối với mặt đất:<br><span class='math'>(m<sub>1</sub> + m<sub>2</sub>)v = m<sub>1</sub>v<sub>1</sub>&prime; + m<sub>2</sub>v<sub>2</sub>&prime; &Rightarrow; (60 + 240) &middot; 2 = 60 &middot; 6 + 240v<sub>2</sub>&prime; &Rightarrow; 600 = 360 + 240v<sub>2</sub>&prime; &Rightarrow; v<sub>2</sub>&prime; = 1,0</span> m/s."
+        },
+        {
+          id: "CH29_L3_Q3",
+          tag: "Mức 9–10 điểm • Đại bác bắn đạn chếch góc 60° trên xe tăng",
+          question: "Một xe tăng có khối lượng tổng cộng <span class='math'>M</span> = 10 tấn đang đứng yên trên mặt đường ngang không ma sát, nòng súng hợp một góc <span class='math'>&alpha; = 60&deg;</span> so với phương ngang hướng lên trên. Khi súng bắn một viên đạn khối lượng <span class='math'>m</span> = 5 kg bay dọc theo nòng súng thì xe tăng giật lùi theo phương ngang với tốc độ <span class='math'>V</span> = 0,02 m/s. Tốc độ của viên đạn lúc rời nòng súng bằng:",
+          svg: `
+            <svg viewBox="0 0 440 130" width="420" height="125" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="95" x2="245" y2="95" stroke="#475569" stroke-width="2.5"/>
+              <rect x="85" y="58" width="90" height="32" rx="8" fill="#15803d"/>
+              <text x="130" y="78" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">M = 10 tấn</text>
+              <line x1="85" y1="74" x2="30" y2="74" stroke="#dc2626" stroke-width="3"/>
+              <polygon points="32,68 20,74 32,80" fill="#dc2626"/>
+              <text x="52" y="60" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">V</tspan> = 0,02 m/s</text>
+              <line x1="150" y1="58" x2="195" y2="15" stroke="#2563eb" stroke-width="3.5"/>
+              <polygon points="190,13 201,10 198,21" fill="#2563eb"/>
+              <text x="195" y="45" font-size="11" font-weight="bold" fill="#1d4ed8">α = 60°</text>
+              <rect x="235" y="20" width="190" height="78" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+              <text x="330" y="44" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1e3a8a">Bảo toàn động lượng theo phương ngang:</text>
+              <text x="330" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#dc2626"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">m · v</tspan> · cos60° = <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">M · V</tspan></text>
+              <text x="330" y="88" text-anchor="middle" font-size="12" font-weight="bold" fill="#15803d">⇒ 5 · <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan> · 0,5 = 10000 · 0,02</text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>80 m/s</span>.",
+            "<span class='math'>40 m/s</span>.",
+            "<span class='math'>120 m/s</span>.",
+            "<span class='math'>160 m/s</span>."
+          ],
+          correctIndex: 0,
+          explanation: "Đổi <span class='math'>M = 10\text{ tấn} = 10 000\text{ kg}</span>. Theo phương ngang (trục <span class='math'>Ox</span>), ngoại lực bằng 0 nên động lượng của hệ bảo toàn theo phương ngang:<br><span class='math'>m &middot; v &middot; cos 60&deg; - M &middot; V = 0 &Rightarrow; v = <span class='frac'><span>M &middot; V</span><span>m &middot; cos 60&deg;</span></span> = <span class='frac'><span>10 000 &middot; 0,02</span><span>5 &middot; 0,5</span></span> = 80</span> m/s."
+        },
+        {
+          id: "CH29_L3_Q4",
+          tag: "Mức 9–10 điểm • Tên lửa phụt khí trên quỹ đạo",
+          question: "Một tên lửa có khối lượng tổng cộng <span class='math'>M</span> = 5 tấn đang chuyển động với tốc độ <span class='math'>v</span> = 100 m/s thì phụt tức thời ra phía sau một lượng khí có khối lượng <span class='math'>m<sub>1</sub></span> = 1 tấn. Tốc độ của khí đối với tên lửa lúc bắt đầu phụt là 400 m/s. Ngay sau khi phụt khí, vận tốc của phần vỏ tên lửa còn lại đối với đất có độ lớn là:",
+          svg: `
+            <svg viewBox="0 0 440 125" width="420" height="120" xmlns="http://www.w3.org/2000/svg">
+              <rect x="135" y="42" width="110" height="32" rx="12" fill="#2563eb"/>
+              <polygon points="245,42 275,58 245,74" fill="#1d4ed8"/>
+              <text x="190" y="62" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#fff">Còn lại: 4 tấn</text>
+              <line x1="275" y1="58" x2="355" y2="58" stroke="#16a34a" stroke-width="3"/>
+              <polygon points="353,52 365,58 353,64" fill="#16a34a"/>
+              <text x="325" y="43" text-anchor="middle" font-size="12" font-weight="bold" fill="#15803d"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>′ = ?</text>
+              <line x1="135" y1="58" x2="55" y2="58" stroke="#dc2626" stroke-width="3"/>
+              <polygon points="57,52 45,58 57,64" fill="#dc2626"/>
+              <text x="88" y="38" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">Khí 1 tấn (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan>′ = −300 m/s)</text>
+              <text x="220" y="104" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a8a">5·100 = 1·(100 − 400) + 4·<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>′  ⇒  <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="9">2</tspan>′ = 200 m/s</text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>200 m/s</span>.",
+            "<span class='math'>180 m/s</span>.",
+            "<span class='math'>225 m/s</span>.",
+            "<span class='math'>250 m/s</span>."
+          ],
+          correctIndex: 0,
+          explanation: "Chọn chiều dương là chiều bay ban đầu của tên lửa (<span class='math'>v = +100</span> m/s).<br>• Vận tốc của lượng khí phụt ra đối với đất là: <span class='math'>v<sub>1</sub>&prime; = v - 400 = 100 - 400 = -300</span> m/s.<br>• Khối lượng tên lửa còn lại: <span class='math'>m<sub>2</sub> = 5 - 1 = 4</span> tấn.<br>• Theo ĐLBT động lượng: <span class='math'>Mv = m<sub>1</sub>v<sub>1</sub>&prime; + m<sub>2</sub>v<sub>2</sub>&prime; &Rightarrow; 5 &middot; 100 = 1 &middot; (-300) + 4v<sub>2</sub>&prime; &Rightarrow; 4v<sub>2</sub>&prime; = 800 &Rightarrow; v<sub>2</sub>&prime; = 200</span> m/s."
+        },
+        {
+          id: "CH29_L3_Q5",
+          tag: "Mức 9–10 điểm • Đạn nổ thành hai mảnh bằng nhau bay vuông góc",
+          question: "Một viên đạn có khối lượng <span class='math'>m</span> đang bay theo phương ngang với tốc độ <span class='math'>v</span> = 600 m/s thì nổ thành hai mảnh có <b>khối lượng bằng nhau</b> (<span class='math'>m<sub>1</sub> = m<sub>2</sub> = 0,5m</span>) và bay theo hai phương <b>vuông góc</b> với nhau. Biết mảnh 1 bay chếch lên hợp với phương ngang góc <span class='math'>60&deg;</span>. Độ lớn vận tốc của mảnh 1 ngay sau khi nổ là:",
+          svg: `
+            <svg viewBox="0 0 440 135" width="420" height="130" xmlns="http://www.w3.org/2000/svg">
+              <line x1="45" y1="80" x2="175" y2="80" stroke="#2563eb" stroke-width="3"/>
+              <polygon points="173,74 185,80 173,86" fill="#2563eb"/>
+              <line x1="45" y1="80" x2="105" y2="18" stroke="#16a34a" stroke-width="3"/>
+              <polygon points="99,18 110,12 107,24" fill="#16a34a"/>
+              <line x1="110" y1="12" x2="185" y2="80" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="4,3"/>
+              <text x="78" y="68" font-size="11" font-weight="bold" fill="#b45309">60°</text>
+              <text x="120" y="98" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#1d4ed8"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p = mv</tspan></text>
+              <text x="55" y="40" font-size="11.5" font-weight="bold" fill="#15803d"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="9">1</tspan></text>
+              <rect x="215" y="20" width="210" height="86" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+              <text x="320" y="45" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#92400e">Tam giác vuông tại đỉnh (<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="8.5">1</tspan> ⊥ <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="8.5">2</tspan>):</text>
+              <text x="320" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#b45309"><tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> = <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">p</tspan> · cos60°  ⇔  0,5<tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">mv</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> = <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">mv</tspan> · 0,5</text>
+              <text x="320" y="94" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#dc2626">⇒ <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan><tspan baseline-shift="sub" font-size="9">1</tspan> = <tspan font-family="Cambria Math, Times New Roman, serif" font-style="italic">v</tspan> = 600 m/s</text>
+            </svg>
+          `,
+          options: [
+            "<span class='math'>600 m/s</span>.",
+            "<span class='math'>300 m/s</span>.",
+            "<span class='math'>200 m/s</span>.",
+            "<span class='math'>500 m/s</span>."
+          ],
+          correctIndex: 0,
+          explanation: "Vì <span class='math'><span class='vec'>p</span> = <span class='vec'>p</span><sub>1</sub> + <span class='vec'>p</span><sub>2</sub></span> và <span class='math'><span class='vec'>p</span><sub>1</sub> &perp; <span class='vec'>p</span><sub>2</sub></span> nên trong tam giác vectơ vuông:<br><span class='math'>p<sub>1</sub> = p &middot; cos 60&deg; &Rightarrow; 0,5m &middot; v<sub>1</sub> = m &middot; v &middot; 0,5 &Rightarrow; v<sub>1</sub> = v = 600</span> m/s."
+        }
+      ]
+    };
+
+    // =========================================================================
+    // 3. QUẢN LÝ TRẠNG THÁI, ĐẢO CÂU HỎI / ĐÁP ÁN & KHÓA CHẶT CẤP ĐỘ 2, 3
+    // =========================================================================
+    const state = {
+      currentLevel: 1,
+      level1PerfectCount: 0, // Bắt buộc đạt đủ 3 lần đúng 12/12 mới mở khóa Cấp độ 2 & 3
+      teacherUnlocked: false,
+      level1AttemptNumber: 1,
+      activeQuestions: [],
+      answers: {},
+      bestScores: { 1: 0, 2: 0, 3: 0 },
+      history: []
+    };
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // Chỉ mở khóa Cấp độ 2 và 3 sau khi hoàn thành đúng 12/12 câu Cấp độ 1 đủ 3 lần
+    function isUnlocked(level) {
+      if (level === 1) return true;
+      return state.level1PerfectCount >= 3 || state.teacherUnlocked;
+    }
+
+    window.handleTeacherUnlock = function () {
+      if (state.teacherUnlocked) {
+        showSoundToast("🔓 Chế độ Giáo viên đã được mở khóa!", true);
+        return;
+      }
+      const inputEl = document.getElementById("teacherCodeInput");
+      const code = (inputEl ? inputEl.value : "").trim();
+      if (code === "1819") {
+        state.teacherUnlocked = true;
+        playUnlockFanfare();
+        showSoundToast("🔓 Mở khóa Chế độ Giáo viên thành công! Đã mở Cấp độ 2 & 3.", true);
+        if (inputEl) {
+          inputEl.value = "";
+          inputEl.placeholder = "Đã mở GV";
+          inputEl.disabled = true;
+        }
+        const btn = document.getElementById("btnTeacherUnlock");
+        if (btn) {
+          btn.textContent = "✅ Đã mở khóa GV";
+          btn.classList.add("unlocked");
+        }
+        renderUnlockProgress();
+      } else {
+        playFunnySound(false);
+        showSoundToast("❌ Mã mở khóa Giáo viên chưa đúng! Vui lòng nhập mã để mở khóa.", false);
+        if (inputEl) inputEl.focus();
+      }
+    };
+
+    function prepareLevelQuestions(level) {
+      const rawList = QUESTIONS_DB[level];
+      const shuffledQuestions = shuffleArray(rawList).map((q) => {
+        const optionObjs = q.options.map((text, idx) => ({
+          text,
+          isCorrect: idx === q.correctIndex
+        }));
+        const shuffledOptions = shuffleArray(optionObjs);
+        return {
+          ...q,
+          shuffledOptions
+        };
+      });
+      state.activeQuestions = shuffledQuestions;
+      state.answers = {};
+    }
+
+    function renderUnlockProgress() {
+      for (let i = 1; i <= 3; i++) {
+        const pill = document.getElementById("star" + i);
+        if (state.level1PerfectCount >= i) {
+          pill.className = "star-pill done";
+          pill.textContent = `🌟 Lần ${i}: Đạt 12/12`;
+        } else {
+          pill.className = "star-pill";
+          pill.textContent = `⭐ Lần ${i}: Chưa đạt`;
+        }
+      }
+
+      const titleEl = document.getElementById("unlockTitle");
+      const subEl = document.getElementById("unlockSubtitle");
+      const tab2 = document.getElementById("tabLevel2");
+      const tab3 = document.getElementById("tabLevel3");
+      const badge2 = document.getElementById("badgeLevel2");
+      const badge3 = document.getElementById("badgeLevel3");
+
+      if (state.level1PerfectCount >= 3 || state.teacherUnlocked) {
+        titleEl.innerHTML = state.teacherUnlocked && state.level1PerfectCount < 3 ? "🔓 CHẾ ĐỘ GIÁO VIÊN: Đã mở khóa Cấp độ 2 (7–8 điểm) và Cấp độ 3 (9–10 điểm)!" : "🔓 CHÚC MỪNG! Em đã hoàn thành đủ 3 lần đúng 12/12 câu Cấp độ 1 và MỞ KHÓA Cấp độ 2 &amp; 3!";
+        subEl.textContent = "Bây giờ em có thể bấm chọn Cấp độ 2 (7–8 điểm) và Cấp độ 3 (9–10 điểm) để tiếp tục luyện tập.";
+        tab2.classList.remove("locked");
+        tab3.classList.remove("locked");
+        badge2.textContent = "🔓 Đã mở • 5 câu";
+        badge3.textContent = "🔓 Đã mở • 5 câu";
+      } else {
+        const remain = 3 - state.level1PerfectCount;
+        titleEl.innerHTML = `🔒 Yêu cầu bắt buộc: Cần thêm ${remain} lần đạt 12/12 câu đúng ở Cấp độ 1 để mở khóa Cấp độ 2 &amp; 3!`;
+        subEl.textContent = "Học sinh bắt buộc phải làm hết 12 câu Cấp độ 1 và làm lại đủ 3 lần đúng hết 12/12 câu mới được mở khóa chuyển lên các cấp độ tiếp theo.";
+        tab2.classList.add("locked");
+        tab3.classList.add("locked");
+        badge2.textContent = "🔒 Khóa • 5 câu";
+        badge3.textContent = "🔒 Khóa • 5 câu";
+      }
+
+      [1, 2, 3].forEach((lv) => {
+        const tab = document.getElementById("tabLevel" + lv);
+        if (lv === state.currentLevel) {
+          tab.classList.add("active");
+        } else {
+          tab.classList.remove("active");
+        }
+      });
+    }
+
+    function updateToolbarStats() {
+      const total = state.activeQuestions.length;
+      const answeredCount = Object.keys(state.answers).length;
+      const correctCount = Object.values(state.answers).filter((a) => a.isCorrect).length;
+
+      const levelNames = {
+        1: "Cấp độ 1 (Nền tảng)",
+        2: "Cấp độ 2 (7–8 điểm)",
+        3: "Cấp độ 3 (9–10 điểm)"
+      };
+      document.getElementById("statCurrentLevel").textContent = levelNames[state.currentLevel];
+      document.getElementById("statProgress").textContent = `${answeredCount} / ${total}`;
+      document.getElementById("statCorrect").textContent = `${correctCount} / ${total}`;
+      document.getElementById("statAttempt").textContent = state.level1AttemptNumber;
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById("questionsContainer");
+      container.innerHTML = "";
+      document.getElementById("roundSummary").classList.remove("show");
+
+      const letters = ["A", "B", "C", "D"];
+
+      state.activeQuestions.forEach((q, qIdx) => {
+        const card = document.createElement("article");
+        card.className = "question-card";
+        card.id = `qcard_${qIdx}`;
+
+        const optionsHtml = q.shuffledOptions
+          .map((opt, optIdx) => {
+            return `
+              <button type="button" class="option-btn" id="opt_${qIdx}_${optIdx}" onclick="handleSelectOption(${qIdx}, ${optIdx})">
+                <span class="option-letter">${letters[optIdx]}</span>
+                <span class="option-content">${opt.text}</span>
+              </button>
+            `;
+          })
+          .join("");
+
+        card.innerHTML = `
+          <div class="q-header">
+            <span class="q-num">Câu ${qIdx + 1} / ${state.activeQuestions.length}</span>
+            <span class="q-tag">${q.tag}</span>
+          </div>
+          <div class="q-text">${q.question}</div>
+          <div class="q-illustration">${q.svg}</div>
+          <div class="options-grid" id="optgrid_${qIdx}">
+            ${optionsHtml}
+          </div>
+          <div class="feedback-box" id="feedback_${qIdx}"></div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      updateToolbarStats();
+    }
+
+    window.handleSelectOption = function (qIdx, optIdx) {
+      if (state.answers[qIdx] !== undefined) return;
+
+      const q = state.activeQuestions[qIdx];
+      const chosen = q.shuffledOptions[optIdx];
+      const isCorrect = chosen.isCorrect;
+
+      state.answers[qIdx] = {
+        selectedOptionIndex: optIdx,
+        isCorrect
+      };
+
+      playFunnySound(isCorrect);
+
+      const card = document.getElementById(`qcard_${qIdx}`);
+      card.classList.add(isCorrect ? "answered-correct" : "answered-wrong");
+
+      q.shuffledOptions.forEach((opt, i) => {
+        const btn = document.getElementById(`opt_${qIdx}_${i}`);
+        btn.disabled = true;
+        if (opt.isCorrect) {
+          btn.classList.add("correct");
+        } else if (i === optIdx && !isCorrect) {
+          btn.classList.add("wrong");
+        }
+      });
+
+      const fb = document.getElementById(`feedback_${qIdx}`);
+      const letters = ["A", "B", "C", "D"];
+      const rightIdx = q.shuffledOptions.findIndex((o) => o.isCorrect);
+      fb.className = "feedback-box show " + (isCorrect ? "correct" : "wrong");
+      fb.innerHTML = `
+        <div class="feedback-title">
+          ${isCorrect ? "✅ CHÍNH XÁC! Làm tốt lắm!" : `❌ CHƯA ĐÚNG! Đáp án đúng là phương án ${letters[rightIdx]}.`}
+        </div>
+        <div>💡 <b>Giải thích chi tiết:</b> ${q.explanation}</div>
+      `;
+
+      updateToolbarStats();
+      checkRoundCompletion();
+    };
+
+    function checkRoundCompletion() {
+      const total = state.activeQuestions.length;
+      const answeredCount = Object.keys(state.answers).length;
+      if (answeredCount < total) return;
+
+      const correctCount = Object.values(state.answers).filter((a) => a.isCorrect).length;
+      if (correctCount > state.bestScores[state.currentLevel]) {
+        state.bestScores[state.currentLevel] = correctCount;
+      }
+
+      const nowStr = new Date().toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      state.history.unshift({
+        time: nowStr,
+        level: state.currentLevel,
+        score: `${correctCount}/${total}`
+      });
+
+      const summaryBox = document.getElementById("roundSummary");
+      const summaryTitle = document.getElementById("summaryTitle");
+      const summaryText = document.getElementById("summaryText");
+      const btnNext = document.getElementById("btnNextLevel");
+      summaryBox.classList.add("show");
+
+      if (state.currentLevel === 1) {
+        if (correctCount === total) {
+          state.level1PerfectCount += 1;
+          renderUnlockProgress();
+          if (state.level1PerfectCount >= 3 || state.teacherUnlocked) {
+            playUnlockFanfare();
+            summaryTitle.innerHTML = `🏆 XUẤT SẮC! Đạt 12/12 câu (${state.level1PerfectCount}/3 lần) – ĐÃ MỞ KHÓA CẤP ĐỘ 2 &amp; 3!`;
+            summaryText.innerHTML = `Chúc mừng em đã vượt qua thử thách <b>3 lần đúng hết 12/12 câu Cấp độ 1</b>. Bây giờ em đã được mở khóa để chuyển lên <b>Cấp độ 2 (7–8 điểm)</b> và <b>Cấp độ 3 (9–10 điểm)</b>!`;
+            btnNext.style.display = "inline-flex";
+          } else {
+            summaryTitle.innerHTML = `🌟 Tuyệt vời! Em đạt 12/12 câu đúng (Đã tích lũy ${state.level1PerfectCount}/3 lần)!`;
+            summaryText.innerHTML = `Em cần làm lại Cấp độ 1 thêm <b>${3 - state.level1PerfectCount} lần đạt 12/12 câu đúng</b> nữa để mở khóa Cấp độ 2 và Cấp độ 3. Hãy bấm <b>"Làm lại cấp độ này (Đảo đề mới)"</b> nhé!`;
+            btnNext.style.display = "none";
+          }
+        } else {
+          summaryTitle.innerHTML = `💪 Kết quả lượt này: Đúng ${correctCount}/${total} câu!`;
+          summaryText.innerHTML = `Chưa đạt 12/12 câu nên lượt này chưa được tính vào 3 lần mở khóa (Hiện tại: <b>${state.level1PerfectCount}/3 lần</b>). Hãy đọc kĩ lời giải các câu sai và bấm <b>"Làm lại cấp độ này (Đảo đề mới)"</b> nhé!`;
+          btnNext.style.display = "none";
+        }
+      } else {
+        summaryTitle.innerHTML = `🎯 Hoàn thành Cấp độ ${state.currentLevel}: Đúng ${correctCount}/${total} câu!`;
+        summaryText.innerHTML = `Em có thể bấm làm lại để luyện tập với đề đảo mới, chuyển cấp độ, hoặc bấm nút <b>"Báo Họ Tên &amp; Kết Quả Thực Hiện"</b> ở phía trên.`;
+        btnNext.style.display = state.currentLevel === 2 ? "inline-flex" : "none";
+      }
+    }
+
+    window.selectLevel = function (level) {
+      if (!isUnlocked(level)) {
+        playFunnySound(false);
+        showSoundToast(`🔒 Cấp độ ${level} đang khóa! Phải đạt 12/12 câu Cấp độ 1 đủ 3 lần (Hiện tại: ${state.level1PerfectCount}/3) mới mở khóa!`, false);
+        return;
+      }
+      state.currentLevel = level;
+      prepareLevelQuestions(level);
+      renderUnlockProgress();
+      renderQuestions();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    window.restartCurrentLevel = function () {
+      if (state.currentLevel === 1) {
+        state.level1AttemptNumber += 1;
+      }
+      prepareLevelQuestions(state.currentLevel);
+      renderQuestions();
+      window.scrollTo({ top: 180, behavior: "smooth" });
+    };
+
+    window.goNextUnlockedLevel = function () {
+      if (state.currentLevel === 1 && isUnlocked(2)) {
+        selectLevel(2);
+      } else if (state.currentLevel === 2 && isUnlocked(3)) {
+        selectLevel(3);
+      }
+    };
+
+    // =========================================================================
+    // 4. BÁO HỌ TÊN & KẾT QUẢ THỰC HIỆN (MODAL + SAO CHÉP)
+    // =========================================================================
+    function computeTotal10PointScale() {
+      const s1 = (state.bestScores[1] / 12) * 6;
+      const s2 = (state.bestScores[2] / 5) * 2;
+      const s3 = (state.bestScores[3] / 5) * 2;
+      return (s1 + s2 + s3).toFixed(2);
+    }
+
+    document.getElementById("btnShowReport").addEventListener("click", () => {
+      const fullName = document.getElementById("studentName").value.trim() || "(Chưa nhập họ tên)";
+      const className = document.getElementById("studentClass").value.trim() || "(Chưa nhập lớp)";
+
+      const totalScore = computeTotal10PointScale();
+      const unlockedText = state.level1PerfectCount >= 3 ? "✅ Đã mở khóa Cấp độ 2 & 3" : `🔒 Chưa mở khóa (${state.level1PerfectCount}/3 lần 12/12)`;
+
+      const historyHtml =
+        state.history.length === 0
+          ? `<div class="history-item">Chưa có lượt làm bài nào hoàn tất.</div>`
+          : state.history
+              .map(
+                (h, idx) =>
+                  `<div class="history-item">Lượt ${state.history.length - idx} (${h.time}) – <b>Cấp độ ${h.level}</b>: Đúng <b>${h.score}</b> câu</div>`
+              )
+              .join("");
+
+      const reportBody = document.getElementById("reportBody");
+      reportBody.innerHTML = `
+        <p style="margin-bottom:8px;">📌 <b>Chủ đề:</b> Chủ đề 29 – Định Luật Bảo Toàn Động Lượng (Vật Lí 10)</p>
+        <table class="report-table">
+          <tbody>
+            <tr>
+              <th>Họ và tên học sinh</th>
+              <td><b>${fullName}</b></td>
+            </tr>
+            <tr>
+              <th>Lớp</th>
+              <td><b>${className}</b></td>
+            </tr>
+            <tr>
+              <th>Số lần đạt 12/12 Cấp độ 1</th>
+              <td><b>${state.level1PerfectCount} / 3 lần</b> (${unlockedText})</td>
+            </tr>
+            <tr>
+              <th>Kết quả cao nhất Cấp độ 1 (12 câu)</th>
+              <td><b>${state.bestScores[1]} / 12 câu</b></td>
+            </tr>
+            <tr>
+              <th>Kết quả cao nhất Cấp độ 2 (7–8đ: 5 câu)</th>
+              <td><b>${state.bestScores[2]} / 5 câu</b></td>
+            </tr>
+            <tr>
+              <th>Kết quả cao nhất Cấp độ 3 (9–10đ: 5 câu)</th>
+              <td><b>${state.bestScores[3]} / 5 câu</b></td>
+            </tr>
+            <tr>
+              <th>Tổng điểm quy đổi (Thang điểm 10)</th>
+              <td><b style="color:#dc2626; font-size:1.15rem;">${totalScore} / 10 điểm</b></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="font-weight:700; font-size:0.88rem; margin-top:10px;">🕒 Lịch sử các lượt hoàn thành trong phiên học:</div>
+        <div class="history-list">${historyHtml}</div>
+      `;
+
+      document.getElementById("reportModal").classList.add("show");
+    });
+
+    window.closeReportModal = function () {
+      document.getElementById("reportModal").classList.remove("show");
+    };
+
+    window.copyReportText = function () {
+      const fullName = document.getElementById("studentName").value.trim() || "(Chưa nhập họ tên)";
+      const className = document.getElementById("studentClass").value.trim() || "(Chưa nhập lớp)";
+      const totalScore = computeTotal10PointScale();
+      const text = [
+        "=== BÁO CÁO KẾT QUẢ LUYỆN TẬP VẬT LÍ 10 ===",
+        "Chủ đề 29: ĐỊNH LUẬT BẢO TOÀN ĐỘNG LƯỢNG",
+        `Học sinh: ${fullName} - Lớp: ${className}`,
+        `- Cấp độ 1 (12 câu): Đạt ${state.bestScores[1]}/12 câu (Số lần đạt 12/12: ${state.level1PerfectCount}/3 lần)`,
+        `- Cấp độ 2 (7-8đ): Đạt ${state.bestScores[2]}/5 câu`,
+        `- Cấp độ 3 (9-10đ): Đạt ${state.bestScores[3]}/5 câu`,
+        `=> TỔNG ĐIỂM QUY ĐỔI: ${totalScore} / 10 điểm`
+      ].join("\n");
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showSoundToast("📋 Đã sao chép kết quả! Em có thể dán gửi cho Giáo viên.", true);
+        });
+      } else {
+        alert(text);
+      }
+    };
+
+    // Khởi tạo bài làm lần đầu
+    prepareLevelQuestions(1);
+    renderUnlockProgress();
+    renderQuestions();
+  </script>
+</body>
+</html>
+
